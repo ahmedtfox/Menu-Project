@@ -1,6 +1,6 @@
 import { Button, Col, Row } from "react-bootstrap";
 
-function Category({ filterByCategory }) {
+function Category({ filterByCategory, allCat }) {
   //const filterByCategory = props.filter;
   const ff = (cat) => {
     filterByCategory(cat);
@@ -8,41 +8,20 @@ function Category({ filterByCategory }) {
   return (
     <Row className="my-2 mb-2">
       <Col className="justify-content-center d-flex">
-        <Button
-          variant="outline-info"
-          className="mx-2"
-          onClick={() => {
-            ff("الكل");
-          }}
-        >
-          الكل
-        </Button>
-        <Button
-          variant="outline-info"
-          className="mx-2"
-          onClick={() => {
-            ff("فطار");
-          }}
-        >
-          فطار
-        </Button>
-        <Button
-          onClick={() => {
-            ff("غذاء");
-          }}
-          className="mx-2"
-        >
-          غداء
-        </Button>
-        <Button
-          variant="outline-info"
-          className="mx-2"
-          onClick={() => {
-            ff("عشاء");
-          }}
-        >
-          العشاء
-        </Button>
+        {allCat.map((cat) => {
+          return (
+            <Button
+              key={cat}
+              variant="outline-info"
+              className="mx-2"
+              onClick={() => {
+                ff(cat);
+              }}
+            >
+              {cat}
+            </Button>
+          );
+        })}
       </Col>
     </Row>
   );

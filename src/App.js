@@ -7,7 +7,16 @@ import ItemsList from "./components/ItemsList";
 import { useState } from "react";
 function App() {
   const [data, setData] = useState(items);
-
+  // get all category
+  const allCat = [
+    "الكل",
+    ...new Set(
+      items.map((i) => {
+        return i.category;
+      })
+    ),
+  ];
+  console.log(allCat);
   const filterByCategory = (cat) => {
     if (cat === "الكل") {
       setData(items);
@@ -24,7 +33,7 @@ function App() {
 
       <Container>
         <Header />
-        <Category filterByCategory={filterByCategory} />
+        <Category filterByCategory={filterByCategory} allCat={allCat} />
         <ItemsList items={data} />
       </Container>
     </div>
