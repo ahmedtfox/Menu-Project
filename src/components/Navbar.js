@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -5,7 +6,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-function NavBar() {
+function NavBar({ searchFilter }) {
+  const [line, setLine] = useState("");
+  const search = () => {
+    searchFilter(line);
+  };
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -36,8 +41,22 @@ function NavBar() {
             </Nav.Link>
           </Nav>
           <Form className="d-flex">
-            <Form.Control type="text" placeholder="بحث" className="me-2" />
-            <Button variant="outline-success">بحث</Button>
+            <Form.Control
+              onChange={(e) => {
+                setLine(e.target.value);
+              }}
+              type="text"
+              placeholder="بحث"
+              className="me-2"
+            />
+            <Button
+              onClick={() => {
+                search();
+              }}
+              variant="outline-success"
+            >
+              بحث
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>

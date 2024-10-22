@@ -16,7 +16,7 @@ function App() {
       })
     ),
   ];
-  console.log(allCat);
+
   const filterByCategory = (cat) => {
     if (cat === "الكل") {
       setData(items);
@@ -27,9 +27,20 @@ function App() {
     });
     setData(newArr);
   };
+
+  const searchFilter = (line) => {
+    console.log(line);
+    if (line !== "") {
+      const newArr = items.filter((i) => {
+        return i.title === line;
+      });
+      console.log(newArr);
+      setData(newArr);
+    }
+  };
   return (
     <div className="font all-color">
-      <NavBar />
+      <NavBar searchFilter={searchFilter} />
 
       <Container>
         <Header />
